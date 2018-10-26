@@ -324,7 +324,7 @@ if(!check.voiceChannelID){
   rebel++;
 }
 }
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
   client.setInterval(() =>{
     let d = Date.now()
   }, 5000);
@@ -335,16 +335,16 @@ let newUserChannel = newMember.voiceChannel
 let oldUserChannel = oldMember.voiceChannel
  if(oldUserChannel === undefined && newUserChannel !== undefined) {
    rebel++;
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
 } else if(newUserChannel === undefined){
   rebel--;
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
 }
 });
 client.on('message', Codes => {
   
   if(Codes.content === "!صوت") {
-      Codes.channel.send("Zombie Voice : ["+rebel+"]");
+      Codes.channel.send("Zombie Voice : "+rebel+"");
 }
 });
 
