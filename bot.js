@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const devs = ['466425075487342615','466425075487342615'];
-var prefix = "$";
-const adminprefix = "$"
+var prefix = ".";
+const adminprefix = "."
 const db = require('quick.db');
 const client = new Discord.Client();   
 const giphy = require('giphy-api')();    
@@ -36,7 +36,7 @@ const sql = require("sqlite");
 const sWlc = {}
 const premium = ['466425075487342615']
 client.on('message', message => {
-var prefix = "$";
+var prefix = ".";
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
   if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
@@ -175,5 +175,75 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
+
+client.on('message', message => {
+    if (message.content.startsWith("رابط")) {
+
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 2,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+  message.channel.send("**:link:.تم ارسال الرابط برسالة خاصة**")
+
+message.author.send(`**مدة الرابط : يـوم
+عدد استخدامات الرابط : 5**`)
+
+
+    }
+});
+
+
+client.on("message", message => {
+ 
+    var args = message.content.split(' ').slice(1);
+    var msg = message.content.toLowerCase();
+    if( !message.guild ) return;
+    if( !msg.startsWith( prefix + 'role' ) ) return;
+    if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
+    if( msg.toLowerCase().startsWith( prefix + 'rerole' ) ){
+        if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+        if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+        var role = msg.split(' ').slice(2).join(" ").toLowerCase();
+        var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first();
+        if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+            message.mentions.members.first().removeRole( role1 );
+            return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+        }
+        if( args[0].toLowerCase() == "all" ){
+            message.guild.members.forEach(m=>m.removeRole( role1 ))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
+        } else if( args[0].toLowerCase() == "bots" ){
+            message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
+        } else if( args[0].toLowerCase() == "humans" ){
+            message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
+        }  
+    } else {
+        if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+        if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+        var role = msg.split(' ').slice(2).join(" ").toLowerCase();
+        var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first();
+        if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+            message.mentions.members.first().addRole( role1 );
+            return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+        }
+        if( args[0].toLowerCase() == "all" ){
+            message.guild.members.forEach(m=>m.addRole( role1 ))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
+        } else if( args[0].toLowerCase() == "bots" ){
+            message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
+        } else if( args[0].toLowerCase() == "humans" ){
+            message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+            return  message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
+        }
+    }
+});
+
+
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
