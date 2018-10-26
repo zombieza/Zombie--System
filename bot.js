@@ -244,27 +244,111 @@ client.on("message", message => {
     }
 });
 
-
-
-client.on('message', omar => {
-if(omar.content.split(' ')[0] == prefix + 'dc') {  // delete all channels
-if (!omar.channel.guild) return;
-if(!omar.guild.member(omar.author).hasPermission("MANAGE_CHANNELS")) return omar.reply("**You Don't Have ` MANAGE_CHANNELS ` Permission**");
-if(!omar.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return omar.reply("**I Don't Have ` MANAGE_CHANNELS ` Permission**");
-omar.guild.channels.forEach(m => {
-m.delete();
-});// omar jedol / Codes
-}// omar jedol / Codes
-if(omar.content.split(' ')[0] == prefix + 'dr') { // delete all roles
-if (!omar.channel.guild) return;
-if(!omar.guild.member(omar.author).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return omar.reply("**You Don't Have ` MANAGE_ROLES_OR_PERMISSIONS ` Permission**");
-if(!omar.guild.member(client.user).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return omar.reply("**I Don't Have ` MANAGE_ROLES_OR_PERMISSIONS ` Permission**");
-omar.guild.roles.forEach(m => {
-m.delete();
-});// omar jedol / Codes
-omar.reply("`تم حذف جميع الرتب بنجاح`")
-}// omar jedol / Codes
+client.on('message', async message =>{
+const ms = require("ms");
+if (message.author.omar) return;
+if (!message.content.startsWith(prefix)) return;
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+    if(command == "اسكت") {
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.reply("https://i.imgur.com/aTNsBda.png") .then(m => m.delete(5000));
+    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**:x:  لاتستطيع اعطاء ميوت لأحد ادارة السيرفر **');
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    //start of create role
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#070000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false,
+            SPEAK : false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+    //end of create role
+let mutetime = args[1];
+    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
+ 
+    await(tomute.addRole(muterole.id));
+message.reply(`:white_check_mark:<@${tomute.id}> ${ms(ms(mutetime))} : **تم اعطائه ميوت ومدة الميوت :zipper_mouth:**`);
+setTimeout(function(){
+      tomute.removeRole(muterole.id);
+      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
+    }, ms(mutetime));
+ 
+ 
+ 
+  }
+if(command === `تكلم`) {
+  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+ 
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
+ 
+  let role = message.guild.roles.find (r => r.name === "Muted");
+ 
+  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
+ 
+  await toMute.removeRole(role)
+  message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+ 
+  return;
+ 
+  }
+ 
 });
+
+let rebel;
+client.on("ready", async  => {
+    let guild = client.guilds.get("470653659114635275");
+  let users = guild.members.map(member => member.user.id);
+  let i;
+  rebel=0;
+for (i=0 ; i < users.length ; i++) {
+ let   check = guild.members.get(users[i]);
+if(!check.voiceChannelID){
+        continue;
+}else{
+  rebel++;
+}
+}
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+  client.setInterval(() =>{
+    let d = Date.now()
+  }, 5000);
+});
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+    let guild = client.guilds.get("470653659114635275");
+let newUserChannel = newMember.voiceChannel
+let oldUserChannel = oldMember.voiceChannel
+ if(oldUserChannel === undefined && newUserChannel !== undefined) {
+   rebel++;
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+} else if(newUserChannel === undefined){
+  rebel--;
+guild.channels.find('id', '505346605327712256').setName("Zombie Voice : ["+rebel+"]");
+}
+});
+client.on('message', Codes => {
+  
+  if(Codes.content === "!صوت") {
+      Codes.channel.send("Zombie Voice : ["+rebel+"]");
+}
+});
+
+
 
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
