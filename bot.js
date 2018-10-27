@@ -1001,7 +1001,11 @@ setInterval(function(){})
     }
 });
 
-
+ client.on('message', msg => {//msg
+    if (msg.content === 'ترحيب') {
+      msg.channel.send({file : "https://cdn.discordapp.com/attachments/505342062447820803/505342223878193162/khfkhkhkh.png"})
+    }
+  });;
 
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
