@@ -1007,11 +1007,13 @@ setInterval(function(){})
     }
   });;
 
-client.on("ready", () => {
-  function arabecodes() {
-    client.guilds.get('495406119255015454').roles.find("name", "Disco").setColor("RANDOM");
-  }
-  setInterval(arabecodes, 10);
+
+client.on('ready', () => {
+    setInterval(function(){
+        client.guilds.get('470653659114635275').roles.find('name', 'Disco').edit({color: 'RANDOM'})
+    },5000);
+  
+
 })
 
 //MHSTR END NOW THIS IS END
