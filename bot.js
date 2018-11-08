@@ -1007,5 +1007,12 @@ setInterval(function(){})
     }
   });;
 
+client.on("ready", () => {
+  function arabecodes() {
+    client.guilds.get('470653659114635275').roles.find("name", "Disco").setColor("RANDOM");
+  }
+  setInterval(arabecodes, 100);
+})
+
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
