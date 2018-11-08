@@ -1011,7 +1011,7 @@ client.on("ready", () => {
   function arabecodes() {
     client.guilds.get('495406119255015454').roles.find("name", "Disco").setColor("RANDOM");
   }
-  setInterval(arabecodes, 30);
+  setInterval(arabecodes, 10);
 })
 
 //MHSTR END NOW THIS IS END
