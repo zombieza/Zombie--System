@@ -1009,7 +1009,7 @@ setInterval(function(){})
 
 client.on("ready", () => {
   function arabecodes() {
-    client.guilds.get('470653659114635275').roles.find("name", "Disco").setColor("RANDOM");
+    client.guilds.get('495406119255015454').roles.find("name", "Disco").setColor("RANDOM");
   }
   setInterval(arabecodes, 100);
 })
