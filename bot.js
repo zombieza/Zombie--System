@@ -327,7 +327,7 @@ if(!check.voiceChannelID){
   rebel++;
 }
 }
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
+guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
   client.setInterval(() =>{
     let d = Date.now()
   }, 5000);
@@ -338,16 +338,16 @@ let newUserChannel = newMember.voiceChannel
 let oldUserChannel = oldMember.voiceChannel
  if(oldUserChannel === undefined && newUserChannel !== undefined) {
    rebel++;
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
+guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
 } else if(newUserChannel === undefined){
   rebel--;
-guild.channels.find('id', '505346605327712256').setName("Zombie Voice : "+rebel+"");
+guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
 }
 });
 client.on('message', Codes => {
   
   if(Codes.content === "!صوت") {
-      Codes.channel.send("Zombie Voice : "+rebel+"");
+      Codes.channel.send("Galaxy Voice : : "+rebel+"");
 }
 });
 
@@ -1011,11 +1011,38 @@ setInterval(function(){})
 
 client.on('ready', () => {
     setInterval(function(){
-        client.guilds.get('470653659114635275').roles.find('name', 'Disco').edit({color: 'RANDOM'})
+        client.guilds.get('470653659114635275').roles.find('name', 'Galaxy Disco').edit({color: 'RANDOM'})
     },5000);
   
 
 })
+
+
+client.on('message', message => {
+	    var prefix = "م";
+    if (message.content.startsWith(prefix + 'سح')) {
+      if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(`ماعندك هذا البرمشن[*MANAGE_MESSAGES*] `).catch(console.error);
+  message.delete()
+  if(!message.channel.guild) return;
+  let args = message.content.split(" ").slice(1);
+  
+  const messagecount = parseInt(args.join(' '));
+  
+  message.channel.fetchMessages({
+  
+  limit: messagecount
+  
+  }).then(messages => message.channel.bulkDelete(messages));
+  message.channel.sendMessage("", {embed: {
+    title: "**تــم مسح الشات **",
+    color: 0x06DF00,
+    footer: {
+    
+    }
+    }}).then(msg => {msg.delete(3000)});
+  };
+  
+  });
 
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
