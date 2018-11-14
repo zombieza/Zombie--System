@@ -69,7 +69,7 @@ client.on("guildMemberAdd", member => {
          moment.locale('ar-ly');
          var h = member.user;
         let heroo = new Discord.RichEmbed()
-        .addField('**Welcome 2 Galaxy Stars :coffee: :dizzy: , **',`**Welcome 2 Galaxy Stars :coffee: :dizzy: , **``,true)                 
+        .addField('**Welcome 2 Galaxy Stars :coffee: :dizzy: , **',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)               
      welcomer.send({embed:heroo});          
          
       var Canvas = require('canvas')
@@ -105,7 +105,7 @@ client.on("guildMemberAdd", member => {
                               ctx.font = '30px Arial';
                               ctx.fontSize = '28px';
                               ctx.fillStyle = "#FFFFFF";
-      ctx.fillText(`Welcome To ${member.guild.name}`, 245, 80);
+      ctx.fillText(``, 245, 80);
       
                               //AVATARً
                               let Avatar = Canvas.Image;
