@@ -995,7 +995,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-const adminprefix = "م"
+	    var prefix = "م";
     if (message.content.startsWith(prefix + 'سح')) {
       if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(`ماعندك هذا البرمشن[*MANAGE_MESSAGES*] `).catch(console.error);
   message.delete()
