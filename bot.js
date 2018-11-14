@@ -40,7 +40,7 @@ var prefix = ".";
 if(message.channel.type === "dm") return;
 if(message.author.bot) return;
   if(!sWlc[message.guild.id]) sWlc[message.guild.id] = {
-    channel: "𝗭ombie"
+    channel: "galaxy"
 }
 const channel = sWlc[message.guild.id].channel
   if (message.content.startsWith(prefix + "setwelcomer")) {
@@ -56,18 +56,10 @@ const channel = sWlc[message.guild.id].channel
 
 client.on("guildMemberAdd", member => {
       if(!sWlc[member.guild.id]) sWlc[member.guild.id] = {
-    channel: "𝗭ombie"
+    channel: "galaxy"
   }
-   const channel = sWlc[member.guild.id].channel
-    const sChannel = sWlc[member.guild.id].channel
-    let welcomer = member.guild.channels.find('name', sChannel);
-    let memberavatar = member.user.avatarURL
-      if (!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var h = member.user;
-        let heroo = new Discord.RichEmbed()
-       
+
+   
      welcomer.send({embed:heroo});  
         
          
@@ -149,7 +141,7 @@ client.on("ready", () => {
  
  
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("505335216219488266");
+    let channel = member.guild.channels.get("512344096363380738");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
