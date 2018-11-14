@@ -69,7 +69,7 @@ client.on("guildMemberAdd", member => {
          moment.locale('ar-ly');
          var h = member.user;
         let heroo = new Discord.RichEmbed()
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)                  
+        .addField('**Welcome 2 Galaxy Stars :coffee: :dizzy: , **',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)                  
      welcomer.send({embed:heroo});          
          
       var Canvas = require('canvas')
