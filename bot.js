@@ -876,5 +876,71 @@ message.guild.member(user).kick();
 }
 });
 
+client.on('message', message => {
+  if(!message.channel.guild) return;
+  var prefix = "ا";
+if(message.content.startsWith(prefix + 'سحب')) {
+  var cmdrole = message.guild.roles.find("name", config.cmdrole)
+     if (message.member.hasPermission("MOVE_MEMBERS")) {
+if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**I Don't Have `MOVE_MEMBERS` Permission**").then(msg => msg.delete(6000))
+            if (message.mentions.users.size === 0) { const embed = new Discord.RichEmbed()
+                   .setColor("#fff")
+                   .setTitle(" أمثله على الأوامر : ")
+                   .setDescription(`
+         **+move @Moha**: لسحب شخص ما الى الروم الصوتي الخاص بك
+         **+move all**: لسحب جميع الاعضاء الى روم الصوتي الخاص بك`)
+                   .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+               
+                 message.channel.send({ embed: embed });
+            }
+            if (message.member.voiceChannel != null) {
+                   if (message.mentions.members.first().voiceChannel != null) {
+                          var authorchannel = message.member.voiceChannelID;
+                          var usermentioned = message.mentions.members.first().id;
+                         var embed = new Discord.RichEmbed()
+                            .setTitle("Succes!")
+                            .setColor("#fff")
+                            .setDescription(`**:white_check_mark:| لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك**`)
+                            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+
+                          var embed = new Discord.RichEmbed()
+                            .setTitle(`You are Moved in ${message.guild.name}`)
+                            .setColor("#000000")
+                            .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
+                            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+                                                        message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+                          message.guild.members.get(usermentioned).send(embed)
+                   } else {
+                          message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+                   }
+            } else {
+                   message.channel.send("``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``")
+            }
+     } else {
+            message.react("❌")
+     }
+  }
+  });
+
+  
+client.on('message', message => {
+  var prefix = "ا";
+  if(message.content.startsWith(prefix + 'سحب جميع')) {
+   if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
+     if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
+  if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+   var author = message.member.voiceChannelID;
+   var m = message.guild.members.filter(m=>m.voiceChannel)
+   message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+   m.setVoiceChannel(author)
+   })
+   .setColor("#fff")
+   .setTitle("Succes!")
+   .setDescription(`**:white_check_mark:| تم سحب جميع الأعضاء الى الروم الصوتي الخاص بك`)
+             .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+  
+   }
+     });
+
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
