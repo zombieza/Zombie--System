@@ -895,7 +895,7 @@ setTimeout(() => {
   banse.delete(ser.id)
 },8000)
 
-if(boner.bans > 3 {
+if(boner.bans > 2 {
   let roles = guild.members.get(ser.id).roles.array()
 guild.members.get(ser.id).removeRoles(roles)
 }
