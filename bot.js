@@ -877,8 +877,28 @@ message.guild.member(user).kick();
 });
 
 
+client.on('message', msg => {
+  if (msg.content === 'السلام عليكم') {
+    msg.reply('**وعڵيڪم ٱڵسڵٱم يٱ عسڵ :rose: **');
+  }
+});
 
+client.on('message', msg => {
+  if (msg.content === 'باك') {
+    msg.reply('**:revolving_hearts: وّلّلّّكّكّممّّ نورت ي مز،من زمان عنك**');
+  }
+});
 
+client.on('message', msg => {
+  if (msg.content === 'برب') {
+    msg.reply('**تيت ي عسڵ , ڵٱ تطوڵ :broken_heart: **');
+  }
+});
 
+client.on('message', msg => {
+  if (msg.content === '!') {
+    msg.reply('**Welcome To Galaxy Server :coffee: :dizzy: ,**');
+  }
+});
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
