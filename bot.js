@@ -773,11 +773,7 @@ setInterval(function(){})
     }
 });
 
- client.on('message', msg => {//msg
-    if (msg.content === '!') {
-      msg.channel.send({file : "https://cdn.discordapp.com/attachments/505342062447820803/514002217317957632/INFO-1.png"})
-    }
-  });;
+
 
 
 
@@ -888,6 +884,28 @@ client.on('message', msg => {
     msg.reply('**تيت ي عسڵ , ڵٱ تطوڵ :broken_heart: **');
   }
 });
+
+client.on('message', message => {
+    if (message.content.startsWith("رابط")) {
+
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 5,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+  message.channel.send("**:link:.تم ارسال الرابط برسالة خاصة**")
+
+message.author.send(`**مدة الرابط : يـوم
+عدد استخدامات الرابط : 5**`)
+
+
+    }
+});
+
+
+
 
 
 //MHSTR END NOW THIS IS END
