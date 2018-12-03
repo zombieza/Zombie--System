@@ -780,13 +780,7 @@ setInterval(function(){})
   });;
 
 
-client.on('ready', () => {
-    setInterval(function(){
-        client.guilds.get('518870778377404416').roles.find('name', 'Disco').edit({color: 'RANDOM'})
-    },5000);
-  
 
-})
 
 
 client.on('message', message => {
