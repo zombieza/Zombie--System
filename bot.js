@@ -6,7 +6,7 @@ const jimp = require('jimp');
 const Canvas = require('canvas');
  
 client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', 'galaxy');
+     const welcomer =  member.guild.channels.find('name', 'dark');
 const w = ['./w1.png'];
  
          let Image = Canvas.Image,
@@ -69,7 +69,7 @@ function forEachObject(obj, func) {
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.get("470653659114635275");
+        guild = client.guilds.get("518870778377404416");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -81,7 +81,7 @@ client.on("ready", () => {
  
  
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("512344096363380738");
+    let channel = member.guild.channels.get("518870778868006937");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -92,7 +92,7 @@ client.on("guildMemberAdd", (member) => {
     console.log('-');
     var guild;
     while (!guild)
-        guild = client.guilds.get("470653659114635275");
+        guild = client.guilds.get("518870778377404416");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -110,7 +110,7 @@ client.on("guildMemberAdd", (member) => {
 
 let rebel;
 client.on("ready", async  => {
-    let guild = client.guilds.get("470653659114635275");
+    let guild = client.guilds.get("518870778377404416");
   let users = guild.members.map(member => member.user.id);
   let i;
   rebel=0;
@@ -122,27 +122,27 @@ if(!check.voiceChannelID){
   rebel++;
 }
 }
-guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
+guild.channels.find('id', '519124975504850965').setName("Dark Voice : "+rebel+"");
   client.setInterval(() =>{
     let d = Date.now()
   }, 5000);
 });
 client.on('voiceStateUpdate', (oldMember, newMember) => {
-    let guild = client.guilds.get("470653659114635275");
+    let guild = client.guilds.get("518870778377404416");
 let newUserChannel = newMember.voiceChannel
 let oldUserChannel = oldMember.voiceChannel
  if(oldUserChannel === undefined && newUserChannel !== undefined) {
    rebel++;
-guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
+guild.channels.find('id', '519124975504850965').setName("Dark Voice : "+rebel+"");
 } else if(newUserChannel === undefined){
   rebel--;
-guild.channels.find('id', '505346605327712256').setName("Galaxy Voice : "+rebel+"");
+guild.channels.find('id', '519124975504850965').setName("Dark Voice : "+rebel+"");
 }
 });
 client.on('message', Codes => {
   
   if(Codes.content === "!صوت") {
-      Codes.channel.send("Galaxy Voice : : "+rebel+"");
+      Codes.channel.send("Dark Voice : : "+rebel+"");
 }
 });
 
@@ -782,7 +782,7 @@ setInterval(function(){})
 
 client.on('ready', () => {
     setInterval(function(){
-        client.guilds.get('470653659114635275').roles.find('name', 'Disco').edit({color: 'RANDOM'})
+        client.guilds.get('518870778377404416').roles.find('name', 'Disco').edit({color: 'RANDOM'})
     },5000);
   
 
@@ -895,10 +895,6 @@ client.on('message', msg => {
   }
 });
 
-client.on('message', msg => {
-  if (msg.content === '!') {
-    msg.reply('**Welcome To Galaxy Server :coffee: :dizzy: ,**');
-  }
-});
+
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
